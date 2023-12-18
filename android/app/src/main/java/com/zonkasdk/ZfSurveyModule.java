@@ -22,32 +22,11 @@ public class ZfSurveyModule extends ReactContextBaseJavaModule {
         return "ZfSurveyModule";
     }
 
-    // @RequiresApi(api = Build.VERSION_CODES.M)
-    // @ReactMethod
-    // public String callZfSurvey(Method init) {
-
-    // }
-
     @ReactMethod
-    public void passMethodToJS(final Callback callback) {
-        // Define a method to be passed to JavaScript
-        Runnable myMethod = new Runnable() {
-            @Override
-            public void run() {
-                // Perform some logic
-                callback.invoke("Hello from native!");
-            }
-        };
-        // Pass the method to JavaScript
-        callback.invoke(myMethod);
-    }
-
-    @ReactMethod
-    public void startPayment(Callback callBack) {
-        String token = "fdkjf7373";
+    public void callZfSurvey(Callback callBack) {
+        String token = "3O3pUl";
         String region = "US";
         callBack.invoke(token, region);
-
     }
 
 }

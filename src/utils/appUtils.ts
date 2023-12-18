@@ -1,51 +1,52 @@
-import {Dimensions} from 'react-native';
-import Constant from './constant';
+import NetInfo from "@react-native-community/netinfo";
+import { Dimensions } from "react-native";
+import Constant from "./constant";
 
 const AppUtils = {
   getAppVersionCode: async function () {
     // Implementation may vary based on how you manage versioning in your React Native project
-    return '1.0';
+    return "1.0";
   },
 
   getDeviceId: async function () {
     // Implementation may vary based on how you retrieve device ID in your React Native project
-    return 'deviceId';
+    return "deviceId";
   },
 
   getDeviceSerial: async function () {
     // Implementation may vary based on how you retrieve device serial in your React Native project
-    return 'deviceSerial';
+    return "deviceSerial";
   },
 
   getDeviceIMEI: async function () {
     // Implementation may vary based on how you retrieve device IMEI in your React Native project
-    return 'deviceIMEI';
+    return "deviceIMEI";
   },
 
   getDeviceResolution: function () {
-    const {width, height} = Dimensions.get('window');
+    const { width, height } = Dimensions.get("window");
     return `${width}x${height}`;
   },
 
   getLocalIpAddress: async function () {
     // Implementation may vary based on how you retrieve local IP address in your React Native project
-    return 'localhost';
+    return "localhost";
   },
 
   get_network: async function () {
     // Implementation may vary based on how you retrieve network type in your React Native project
-    return 'WIFI';
+    return "WIFI";
   },
 
   isTablet: function () {
-    const {height, width} = Dimensions.get('window');
+    const { height, width } = Dimensions.get("window");
     const aspectRatio = height / width;
     return aspectRatio < 1.6; // Assuming a tablet if the aspect ratio is less than 1.6
   },
 
-  isNetworkConnected: function () {
-    // Implementation may vary based on how you check network connectivity in your React Native project
-    return true;
+  isNetworkConnected: async function () {
+    const netInfo = await NetInfo.fetch();
+    return netInfo.isConnected;
   },
 
   getHiddenVariables: async function () {
@@ -67,19 +68,25 @@ const AppUtils = {
     return true;
   },
 
-  getCurrentTime: function (timeStamp, format) {
+  getCurrentTime: function (timeStamp: string, format: string) {
     // Implementation may vary based on how you format time in your React Native project
-    return 'formattedTime';
+    return "formattedTime";
   },
 
-  getCookieId: function (length) {
-    // Implementation may vary based on how you generate a cookie ID in your React Native project
-    return 'cookieId';
+  getCookieId: function (length: number) {
+    const characters =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    let result = "";
+    for (let i = 0; i < length; i++) {
+      const randomIndex = Math.floor(Math.random() * characters.length);
+      result += characters.charAt(randomIndex);
+    }
+    return result;
   },
 
   getScreenName: function () {
     // Implementation may vary based on how you get the current screen name in your React Native project
-    return 'screenName';
+    return "screenName";
   },
 };
 
